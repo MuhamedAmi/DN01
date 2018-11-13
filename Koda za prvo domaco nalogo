@@ -1,0 +1,95 @@
+import java.util.*;
+
+public class DN01_64180017{
+  private static void znaki(int dolzina, char znak){
+    for (int i = 0; i < dolzina; i++){
+      System.out.print(znak);
+    }
+  }
+  private static void prvaVrsta(int valovnaDolzina, int fazniZamik){
+    int razlika = valovnaDolzina/2 - 1;
+    if(valovnaDolzina/2 - fazniZamik > 0){
+      znaki(razlika - fazniZamik, '-');
+      znaki(1, '+');
+      znaki(razlika, ' ');
+      znaki(1, '+');
+      znaki(fazniZamik, '-');
+    }
+    else if(valovnaDolzina/2 - fazniZamik == 0){
+      znaki(1, '+');
+      znaki(razlika,' ');
+      znaki(1, '+');
+      znaki(razlika, '-');
+    }
+    else{
+      znaki(valovnaDolzina - fazniZamik - 1, ' ');
+      znaki(1,'+');
+      znaki(razlika, '-');
+      znaki(1, '+');
+      znaki(fazniZamik - razlika - 1, ' ');
+    }
+  }
+  private static void zadnjaVrsta(int valovnaDolzina, int fazniZamik){
+    int razlika = valovnaDolzina/2 - 1;
+    if(valovnaDolzina/2 - fazniZamik < 0){
+      znaki(valovnaDolzina - fazniZamik - 1, '-');
+      znaki(1,'+');
+      znaki(razlika, ' ');
+      znaki(1, '+');
+      znaki(fazniZamik - razlika - 1, '-');
+    }
+    else if(valovnaDolzina/2 - fazniZamik == 0){
+      znaki(1, '+');
+      znaki(razlika,'-');
+      znaki(1, '+');
+      znaki(razlika, ' ');
+    }
+    else{
+      znaki(razlika - fazniZamik, ' ');
+      znaki(1,'+');
+      znaki(razlika, '-');
+      znaki(1, '+');
+      znaki(fazniZamik, ' ');
+    }
+  }
+  private static void vmesneVrste(int valovnaDolzina, int fazniZamik){
+    int razlika = valovnaDolzina/2 - 1;
+    for(int i = 0; i < 2; i++){
+      if(valovnaDolzina/2 - fazniZamik > 0){
+       znaki(razlika - fazniZamik, ' ');
+       znaki(1,'|');
+       znaki(fazniZamik, ' ');
+      }
+      else if(valovnaDolzina/2 - fazniZamik == 0){
+       znaki(1, '|');
+       znaki(razlika, ' ');
+      }
+      else{
+       znaki(valovnaDolzina - 1 - fazniZamik, ' ');
+       znaki(1,'|');
+       znaki(fazniZamik - valovnaDolzina/2, ' ');
+      }
+    }
+  }
+  public static void main(String[] args){
+    Scanner sc = new Scanner(System.in);
+    int perioda = sc.nextInt();
+    int lambda = sc.nextInt();
+    int amplituda = sc.nextInt();
+    int fazniZamik = sc.nextInt();
+
+    for(int i = 0; i < perioda; i++){
+      prvaVrsta(lambda,fazniZamik);
+    }
+    System.out.println();
+    for(int j = 0; j < amplituda - 1; j++){
+      for(int i = 0; i < perioda; i++){
+        vmesneVrste(lambda, fazniZamik);
+      }
+      System.out.println();
+    }
+    for(int i = 0; i < perioda; i++){
+    zadnjaVrsta(lambda,fazniZamik);
+    }
+  }
+}
